@@ -1,2 +1,2 @@
 # Calc_interface
-Calculadora com interface gráfica
+Calculadora com Interface
