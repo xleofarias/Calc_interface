@@ -97,32 +97,32 @@ class CalculadoraApp(ft.Container):
 
     def button_clicked(self, e):
         data = e.control.data
-        print(f"Button clicked with data = {data}")
+        print(f"Botão clicado = {data}")
         if self.result.value == "Error" or data == "C" or data == "CE":
             self.result.value = "0"
             self.reset()
 
         elif data in ("1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "."):
-            if self.result.value == "0" or self.new_operand == True:
+            if self.result.value == "0" or self.novo_operador == True:
                 self.result.value = data
-                self.new_operand = False
+                self.novo_operador = False
             else:
                 self.result.value = self.result.value + data
 
         elif data in ("+", "-", "*", "/"):
             self.result.value = self.calculate(
-                self.operand1, float(self.result.value), self.operator
+                self.operand1, float(self.result.value), self.operador
             )
-            self.operator = data
+            self.operador = data
             if self.result.value == "Error":
                 self.operand1 = "0"
             else:
                 self.operand1 = float(self.result.value)
-            self.new_operand = True
+            self.novo_operador = True
 
         elif data in ("="):
             self.result.value = self.calculate(
-                self.operand1, float(self.result.value), self.operator
+                self.operand1, float(self.result.value), self.operador
             )
             self.reset()
 
@@ -147,27 +147,27 @@ class CalculadoraApp(ft.Container):
         else:
             return num
 
-    def calculate(self, operand1, operand2, operator):
+    def calculate(self, operand1, operand2, operador):
 
-        if operator == "+":
+        if operador == "+":
             return self.format_number(operand1 + operand2)
 
-        elif operator == "-":
+        elif operador == "-":
             return self.format_number(operand1 - operand2)
 
-        elif operator == "*":
+        elif operador == "*":
             return self.format_number(operand1 * operand2)
 
-        elif operator == "/":
+        elif operador == "/":
             if operand2 == 0:
                 return "Error"
             else:
                 return self.format_number(operand1 / operand2)
 
     def reset(self):
-        self.operator = "+"
+        self.operador = "+"
         self.operand1 = 0
-        self.new_operand = True
+        self.novo_operado = True
 
 
 def main(page: ft.Page) -> None:
